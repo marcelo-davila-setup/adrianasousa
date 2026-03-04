@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Meditação Viva — Adriana Sousa</title>
+
+<style>
+/* Fontes premium do sistema — funciona 100% offline */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@300;400;600;700&display=swap');
+/* Fallback offline — fontes do sistema */
+:root{
+  --sage:#4a7c59;--sage-dark:#2d5a3d;--sage-light:#7aaa8a;--sage-pale:#c8ddd0;--sage-bg:#edf4ef;
+  --ivory:#faf6ef;--ivory-dark:#f0e9d8;--bege:#d4c5a9;--bege-dark:#b8a98a;
+  --warm:#8b6f47;--gold:#b8960c;--gold-light:#d4b44a;
+  --text:#2c2c2c;--text-light:#5a5a5a;--text-muted:#8a8a8a;
+  --white:#ffffff;--radius:18px;--radius-sm:10px;
+  --shadow:0 4px 24px rgba(74,124,89,.13);--shadow-lg:0 10px 44px rgba(74,124,89,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:19px;scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--text);font-family:'Lora',Georgia,serif;min-height:100vh;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--ivory-dark)}
+::-webkit-scrollbar-thumb{background:var(--sage-pale);border-radius:2px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes pulseGreen{0%,100%{box-shadow:0 0 0 0 rgba(74,124,89,.35)}70%{box-shadow:0 0 0 14px rgba(74,124,89,0)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes leafSway{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(4deg) translateY(-6px)}}
+@keyframes breathScale{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(74,124,89,.4)}50%{transform:scale(1.5);box-shadow:0 0 0 20px rgba(74,124,89,0)}}
+@keyframes reading{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+
+/* highlight do auto-scroll */
+.sentence-highlight{
+  background:linear-gradient(90deg,rgba(74,124,89,.18),rgba(122,170,138,.12));
+  border-left:3px solid var(--sage);border-radius:4px;
+  padding:2px 8px;margin:-2px -8px;
+  transition:all .4s ease;
+}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh}
+.screen.active{display:flex;flex-direction:column}
+
+/* ══ COVER ══ */
+#cover{
+  background:linear-gradient(150deg,var(--sage-dark) 0%,var(--sage) 50%,#5d9470 100%);
+  align-items:center;justify-content:center;padding:40px 20px;
+  position:relative;overflow:hidden;
+}
+.cover-deco{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.deco-circle{position:absolute;border-radius:50%;background:rgba(255,255,255,.05)}
+.cover-card{
+  background:var(--ivory);border-radius:28px;padding:48px 32px 40px;
+  max-width:440px;width:100%;text-align:center;
+  box-shadow:0 24px 80px rgba(0,0,0,.22);
+  animation:fadeUp 1s ease;position:relative;z-index:2;
+}
+.as-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:86px;height:86px;border-radius:50%;
+  background:linear-gradient(135deg,var(--sage-dark),var(--sage-light));
+  margin-bottom:22px;animation:floatY 4s ease-in-out infinite;
+  box-shadow:0 10px 32px rgba(74,124,89,.38);
+}
+.as-badge span{font-family:'Playfair Display',serif;font-size:30px;color:#fff;font-style:italic}
+.cover-brand-tag{font-family:'Nunito',sans-serif;font-size:.72rem;letter-spacing:4px;
+  color:var(--sage);text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.cover-title{font-family:'Playfair Display',serif;
+  font-size:clamp(34px,7vw,50px);color:var(--sage-dark);
+  line-height:1.12;margin-bottom:8px;font-weight:700}
+.cover-title em{color:var(--sage);font-style:italic}
+.cover-sub{font-family:'Lora',serif;font-size:1.05rem;color:var(--text-light);
+  font-style:italic;margin-bottom:6px;line-height:1.6}
+.cover-divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--sage),transparent);
+  margin:18px auto}
+.cover-datetime{font-family:'Nunito',sans-serif;font-size:.82rem;
+  color:var(--sage);font-weight:600;margin-bottom:28px}
+.btn-primary{
+  display:inline-block;background:linear-gradient(135deg,var(--sage-dark),var(--sage));
+  color:#fff;border:none;border-radius:50px;padding:16px 44px;
+  font-family:'Playfair Display',serif;font-size:1.05rem;
+  cursor:pointer;letter-spacing:.5px;
+  box-shadow:0 6px 24px rgba(74,124,89,.38);
+  transition:all .3s ease;animation:pulseGreen 2.5s infinite;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(74,124,89,.5)}
+.cover-footer{margin-top:22px;font-family:'Nunito',sans-serif;
+  font-size:.72rem;color:var(--text-muted);line-height:1.6}
+.cover-footer strong{color:var(--sage-dark)}
+
+/* ══ NAME SCREEN ══ */
+#namescreen{
+  background:linear-gradient(150deg,var(--sage-dark),var(--sage));
+  align-items:center;justify-content:center;padding:40px 20px;position:relative;
+}
+.name-card{
+  background:var(--ivory);border-radius:28px;padding:44px 32px;
+  max-width:420px;width:100%;text-align:center;
+  box-shadow:0 24px 80px rgba(0,0,0,.2);animation:fadeUp .9s ease;
+}
+.name-card h2{font-size:1.9rem;color:var(--sage-dark);margin-bottom:8px}
+.name-card p{font-size:1rem;color:var(--text-light);font-style:italic;margin-bottom:28px;line-height:1.7}
+.name-input{
+  width:100%;padding:16px 22px;
+  background:var(--ivory-dark);border:2px solid var(--bege);border-radius:50px;
+  color:var(--text);font-family:'Lora',serif;font-size:1.1rem;
+  outline:none;text-align:center;transition:border-color .3s,box-shadow .3s;
+  margin-bottom:10px;
+}
+.name-input:focus{border-color:var(--sage);box-shadow:0 0 0 4px rgba(74,124,89,.12)}
+.mood-section{margin:20px 0}
+.mood-label{font-family:'Nunito',sans-serif;font-size:.82rem;
+  color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:14px;font-weight:600}
+.mood-grid{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:14px}
+.mood-btn{
+  padding:9px 16px;border-radius:24px;border:2px solid var(--bege);
+  color:var(--text-light);background:var(--ivory-dark);
+  font-family:'Nunito',sans-serif;font-size:.82rem;cursor:pointer;
+  transition:all .2s;font-weight:500;
+}
+.mood-btn.active,.mood-btn:hover{border-color:var(--sage);color:var(--sage-dark);
+  background:var(--sage-bg);font-weight:600}
+.mood-response{min-height:28px;font-family:'Lora',serif;font-size:.9rem;
+  color:var(--sage-dark);font-style:italic;margin-bottom:20px;
+  padding:10px 16px;background:var(--sage-bg);border-radius:var(--radius-sm);
+  transition:all .3s;display:none}
+.mood-response.show{display:block}
+.name-footer{margin-top:20px;font-size:.72rem;color:var(--text-muted);font-family:'Nunito',sans-serif}
+
+/* ══ MAIN ══ */
+#main{background:var(--ivory);flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:200;
+  background:rgba(250,246,239,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--ivory-dark);
+  padding:12px 20px;display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--sage-dark),var(--sage-light));
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.topbar-logo span{font-family:'Playfair Display',serif;font-size:14px;color:#fff;font-style:italic}
+.topbar-info{display:flex;flex-direction:column}
+.topbar-brand{font-family:'Playfair Display',serif;font-size:.82rem;color:var(--sage-dark);font-weight:600}
+.topbar-meta{font-family:'Nunito',sans-serif;font-size:.68rem;color:var(--text-muted);font-weight:500}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.btn-icon{background:var(--sage-bg);border:none;border-radius:50%;
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;font-size:.9rem;color:var(--sage-dark)}
+.btn-icon:hover{background:var(--sage-pale)}
+.btn-icon.active{background:var(--sage);color:#fff}
+
+/* progress */
+.progress-wrap{padding:0 20px 0;display:flex;gap:4px;align-items:center}
+.prog-step{height:3px;flex:1;border-radius:2px;cursor:pointer;
+  background:var(--bege);transition:all .3s}
+.prog-step.done{background:var(--sage-pale)}
+.prog-step.active{background:var(--sage)}
+
+/* TTS bar */
+.tts-bar{
+  background:linear-gradient(135deg,var(--sage-dark),var(--sage));
+  padding:14px 20px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 12px rgba(74,124,89,.2);
+}
+.tts-bar-info{flex:1;min-width:0}
+.tts-bar-title{font-family:'Playfair Display',serif;font-size:.82rem;color:rgba(255,255,255,.75);font-style:italic}
+.tts-bar-status{font-family:'Nunito',sans-serif;font-size:.75rem;color:rgba(255,255,255,.6);margin-top:2px}
+.tts-btn{background:rgba(255,255,255,.18);border:none;border-radius:50%;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:#fff;font-size:1.1rem;transition:all .2s;flex-shrink:0}
+.tts-btn:hover{background:rgba(255,255,255,.28)}
+.tts-btn.big{width:52px;height:52px;background:rgba(255,255,255,.25);font-size:1.3rem}
+.tts-progress{flex:1;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
+.tts-progress-fill{height:100%;background:#fff;border-radius:2px;transition:width .3s;width:0%}
+.tts-speed{background:rgba(255,255,255,.15);border:none;border-radius:20px;
+  padding:4px 10px;color:#fff;font-family:'Nunito',sans-serif;font-size:.72rem;
+  cursor:pointer;transition:all .2s}
+.tts-speed:hover{background:rgba(255,255,255,.25)}
+
+/* content */
+.content{flex:1;overflow-y:auto;padding:0 20px 140px;max-width:700px;margin:0 auto;width:100%}
+.page-wrap{animation:fadeIn .5s ease}
+
+/* chapter header */
+.ch-header{padding:32px 0 20px;border-bottom:2px solid var(--ivory-dark);margin-bottom:28px}
+.ch-number{font-family:'Nunito',sans-serif;font-size:.72rem;letter-spacing:4px;
+  color:var(--sage);text-transform:uppercase;font-weight:700;margin-bottom:8px}
+.ch-title{font-family:'Playfair Display',serif;
+  font-size:clamp(26px,5vw,38px);color:var(--sage-dark);
+  line-height:1.2;margin-bottom:6px;font-weight:700}
+.ch-sub{font-family:'Lora',serif;font-size:1rem;
+  color:var(--text-muted);font-style:italic;line-height:1.6}
+
+/* text block */
+.text-block{
+  font-family:'Lora',serif;font-size:1.08rem;line-height:1.92;
+  color:var(--text);margin-bottom:28px;
+}
+.text-block p{margin-bottom:18px}
+.text-block p:last-child{margin-bottom:0}
+.sentence{display:inline;transition:all .4s ease;border-radius:3px;cursor:default}
+.sentence.active{background:linear-gradient(90deg,rgba(74,124,89,.15),rgba(122,170,138,.08));
+  padding:1px 4px;margin:-1px -4px;}
+
+/* cards */
+.card{
+  background:var(--white);border-radius:var(--radius);padding:26px 24px;
+  border:1.5px solid var(--ivory-dark);margin-bottom:18px;
+  box-shadow:var(--shadow);transition:all .3s;
+}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card-sage{background:var(--sage-bg);border-color:var(--sage-pale)}
+.card-warm{background:#fdf6ee;border-color:#e8d5b7}
+.card-title{font-family:'Playfair Display',serif;font-size:1.15rem;
+  color:var(--sage-dark);margin-bottom:10px;font-weight:600}
+.card-text{font-family:'Lora',serif;font-size:.98rem;
+  color:var(--text-light);line-height:1.82}
+.card-icon{font-size:1.8rem;margin-bottom:10px}
+
+/* section label */
+.section-label{
+  font-family:'Nunito',sans-serif;font-size:.72rem;letter-spacing:3px;
+  color:var(--sage);text-transform:uppercase;font-weight:700;
+  margin:32px 0 16px;display:flex;align-items:center;gap:10px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--sage-pale)}
+
+/* expandable */
+.expand-card{
+  border:1.5px solid var(--bege);border-radius:var(--radius);
+  margin-bottom:12px;overflow:hidden;transition:all .3s;
+  background:var(--white);
+}
+.expand-header{
+  padding:18px 22px;display:flex;align-items:center;gap:14px;
+  cursor:pointer;user-select:none;transition:background .2s;
+}
+.expand-header:hover{background:var(--sage-bg)}
+.expand-header.open{background:var(--sage-bg);border-bottom:1px solid var(--sage-pale)}
+.expand-icon{font-size:1.5rem;flex-shrink:0}
+.expand-title{font-family:'Playfair Display',serif;font-size:1.02rem;
+  color:var(--sage-dark);flex:1;font-weight:600}
+.expand-arrow{color:var(--sage);font-size:.85rem;transition:transform .3s;flex-shrink:0}
+.expand-header.open .expand-arrow{transform:rotate(180deg)}
+.expand-body{display:none;padding:20px 22px;font-family:'Lora',serif;
+  font-size:.98rem;color:var(--text-light);line-height:1.85;white-space:pre-line;
+  animation:fadeUp .3s ease}
+.expand-body.show{display:block}
+
+/* breathing */
+.breath-section{
+  background:linear-gradient(135deg,var(--sage-dark),var(--sage));
+  border-radius:var(--radius);padding:32px 24px;text-align:center;
+  margin-bottom:18px;color:#fff;
+}
+.breath-title-text{font-family:'Playfair Display',serif;font-size:1.3rem;
+  color:#fff;margin-bottom:6px}
+.breath-subtitle{font-family:'Lora',serif;font-size:.88rem;
+  color:rgba(255,255,255,.75);font-style:italic;margin-bottom:28px}
+.breath-circle-wrap{position:relative;width:160px;height:160px;margin:0 auto 20px}
+.breath-outer{position:absolute;inset:0;border-radius:50%;
+  border:2px solid rgba(255,255,255,.2);transition:all 1.2s cubic-bezier(.4,0,.2,1)}
+.breath-inner{
+  position:absolute;inset:15px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.4);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 1.2s cubic-bezier(.4,0,.2,1);
+  backdrop-filter:blur(4px);
+}
+.breath-phase{font-family:'Playfair Display',serif;font-size:.95rem;color:#fff;font-style:italic}
+.breath-count{font-family:'Lora',serif;font-size:2.5rem;color:#fff;line-height:1}
+.breath-hint{font-family:'Nunito',sans-serif;font-size:.78rem;color:rgba(255,255,255,.65)}
+
+/* affirmation */
+.affirmation-box{
+  background:var(--ivory-dark);border-left:4px solid var(--sage);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:22px 24px;margin-bottom:18px;
+  font-family:'Playfair Display',serif;font-size:1.1rem;
+  color:var(--sage-dark);font-style:italic;line-height:1.75;
+}
+
+/* steps */
+.steps-wrap{margin-bottom:18px}
+.step-item{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start}
+.step-num{
+  min-width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--sage-dark),var(--sage));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;flex-shrink:0;
+  box-shadow:0 4px 12px rgba(74,124,89,.3);
+}
+.step-content{}
+.step-title{font-family:'Playfair Display',serif;font-size:1rem;
+  color:var(--sage-dark);margin-bottom:4px;font-weight:600}
+.step-text{font-family:'Lora',serif;font-size:.95rem;
+  color:var(--text-light);line-height:1.75}
+
+/* challenge */
+.challenge-box{
+  background:linear-gradient(135deg,var(--sage-dark),var(--sage));
+  border-radius:var(--radius);padding:24px 22px;margin-bottom:18px;color:#fff;
+}
+.challenge-label{font-family:'Nunito',sans-serif;font-size:.68rem;
+  letter-spacing:3px;color:rgba(255,255,255,.65);text-transform:uppercase;
+  margin-bottom:8px;font-weight:700}
+.challenge-text{font-family:'Lora',serif;font-size:1rem;
+  line-height:1.8;color:#fff}
+
+/* diary */
+.diary-section{
+  background:var(--white);border:1.5px solid var(--ivory-dark);
+  border-radius:var(--radius);padding:24px 22px;margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+.diary-title{font-family:'Playfair Display',serif;font-size:1.1rem;
+  color:var(--sage-dark);margin-bottom:6px;font-weight:600}
+.diary-sub{font-family:'Lora',serif;font-size:.88rem;
+  color:var(--text-muted);font-style:italic;margin-bottom:14px;line-height:1.6}
+.diary-textarea{
+  width:100%;min-height:120px;padding:14px 16px;
+  background:var(--ivory-dark);border:1.5px solid var(--bege);
+  border-radius:var(--radius-sm);font-family:'Lora',serif;font-size:.98rem;
+  color:var(--text);outline:none;resize:vertical;line-height:1.75;
+  transition:border-color .3s,box-shadow .3s;
+}
+.diary-textarea:focus{border-color:var(--sage);box-shadow:0 0 0 4px rgba(74,124,89,.1)}
+.diary-actions{display:flex;gap:10px;margin-top:10px;justify-content:flex-end}
+.btn-sm{padding:9px 20px;border-radius:24px;border:none;cursor:pointer;
+  font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:600;
+  transition:all .2s;letter-spacing:.3px}
+.btn-sage{background:var(--sage);color:#fff}
+.btn-sage:hover{background:var(--sage-dark)}
+.btn-outline{background:transparent;border:1.5px solid var(--bege);color:var(--text-light)}
+.btn-outline:hover{border-color:var(--sage);color:var(--sage)}
+.diary-saved{font-family:'Nunito',sans-serif;font-size:.75rem;
+  color:var(--sage);margin-top:6px;display:none}
+
+/* pillar */
+.pillar-card{
+  display:flex;gap:16px;background:var(--white);
+  border-radius:var(--radius);padding:22px 20px;margin-bottom:14px;
+  border:1.5px solid var(--ivory-dark);box-shadow:var(--shadow);
+}
+.pillar-icon-wrap{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--sage-bg);display:flex;align-items:center;
+  justify-content:center;font-size:1.6rem;flex-shrink:0;
+}
+.pillar-content{}
+.pillar-num{font-family:'Nunito',sans-serif;font-size:.68rem;letter-spacing:2px;
+  color:var(--sage);text-transform:uppercase;font-weight:700;margin-bottom:2px}
+.pillar-title{font-family:'Playfair Display',serif;font-size:1rem;
+  color:var(--sage-dark);margin-bottom:6px;font-weight:600}
+.pillar-text{font-family:'Lora',serif;font-size:.9rem;
+  color:var(--text-light);line-height:1.78}
+
+/* quote */
+.quote-block{
+  padding:24px 28px 24px 22px;margin-bottom:18px;
+  border-left:4px solid var(--gold-light);background:#fffdf5;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+.quote-text{font-family:'Playfair Display',serif;font-size:1.08rem;
+  color:var(--warm);font-style:italic;line-height:1.75;margin-bottom:6px}
+.quote-author{font-family:'Nunito',sans-serif;font-size:.78rem;
+  color:var(--text-muted);letter-spacing:1px;font-weight:600}
+
+/* self eval */
+.eval-item{margin-bottom:14px}
+.eval-question{font-family:'Lora',serif;font-size:.98rem;color:var(--text);
+  font-style:italic;margin-bottom:8px;line-height:1.6}
+.eval-scale{display:flex;gap:6px}
+.eval-btn{flex:1;height:36px;border-radius:8px;border:1.5px solid var(--bege);
+  background:var(--ivory-dark);cursor:pointer;font-family:'Nunito',sans-serif;
+  font-size:.8rem;font-weight:600;color:var(--text-light);transition:all .2s}
+.eval-btn:hover,.eval-btn.sel{background:var(--sage);border-color:var(--sage);color:#fff}
+
+/* counter strip */
+.streak-strip{
+  background:linear-gradient(90deg,var(--sage-bg),var(--ivory-dark));
+  border-radius:var(--radius-sm);padding:16px 20px;
+  display:flex;align-items:center;gap:16px;margin-bottom:18px;
+  border:1.5px solid var(--sage-pale);
+}
+.streak-num{font-family:'Playfair Display',serif;font-size:2.2rem;
+  color:var(--sage-dark);line-height:1;min-width:48px;text-align:center}
+.streak-label{font-family:'Nunito',sans-serif;font-size:.78rem;
+  color:var(--sage);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.streak-sub{font-family:'Lora',serif;font-size:.82rem;color:var(--text-muted);font-style:italic}
+.streak-btn{margin-left:auto;background:var(--sage);border:none;border-radius:24px;
+  padding:9px 18px;color:#fff;font-family:'Nunito',sans-serif;font-size:.78rem;
+  cursor:pointer;font-weight:700;flex-shrink:0;transition:all .2s}
+.streak-btn:hover{background:var(--sage-dark)}
+
+/* nav bottom */
+.bottomnav{
+  position:fixed;bottom:0;left:0;right:0;z-index:150;
+  background:rgba(250,246,239,.97);backdrop-filter:blur(14px);
+  border-top:1px solid var(--ivory-dark);
+  padding:12px 20px 16px;display:flex;align-items:center;
+  justify-content:space-between;max-width:700px;margin:0 auto;
+}
+.btn-nav{border-radius:50px;padding:11px 22px;font-family:'Playfair Display',serif;
+  font-size:.9rem;cursor:pointer;transition:all .2s;border:none;font-weight:400}
+.btn-prev{background:var(--ivory-dark);color:var(--text-light);border:1.5px solid var(--bege)}
+.btn-prev:hover:not(:disabled){background:var(--bege)}
+.btn-prev:disabled{opacity:.35;cursor:default}
+.btn-next{background:linear-gradient(135deg,var(--sage-dark),var(--sage));
+  color:#fff;box-shadow:0 4px 16px rgba(74,124,89,.35)}
+.btn-next:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 22px rgba(74,124,89,.45)}
+.btn-next:disabled{opacity:.35;cursor:default}
+.nav-dots{display:flex;gap:5px;align-items:center}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--bege);
+  cursor:pointer;transition:all .2s}
+.nav-dot.active{background:var(--sage);width:18px;border-radius:4px}
+.nav-dot.done{background:var(--sage-pale)}
+
+/* footer brand */
+.footer-fixed{
+  position:fixed;bottom:58px;left:0;right:0;text-align:center;
+  font-family:'Nunito',sans-serif;font-size:.64rem;color:var(--text-muted);
+  pointer-events:none;z-index:149;letter-spacing:.5px;
+}
+.brand-footer{margin-top:auto;text-align:center;padding:18px 20px 10px;
+  font-family:'Nunito',sans-serif;font-size:.7rem;color:var(--text-muted);
+  border-top:1px solid var(--ivory-dark);line-height:1.7}
+.brand-footer strong{color:var(--sage-dark)}
+
+/* responsive */
+@media(max-width:480px){
+  html{font-size:17px}
+  .cover-card{padding:38px 22px 32px}
+  .content{padding:0 16px 140px}
+  .topbar{padding:10px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div id="cover" class="screen active">
+  <div class="cover-deco">
+    <div class="deco-circle" style="width:350px;height:350px;top:-120px;right:-100px"></div>
+    <div class="deco-circle" style="width:200px;height:200px;bottom:-60px;left:-60px"></div>
+  </div>
+  <div class="cover-card">
+    <div class="as-badge"><img src="https://pub-0de75c105f984c73a6321e028a9b80e6.r2.dev/Imagem%20do%20WhatsApp%20de%202025-10-29%20%C3%A0(s)%2010.15.44_5032b145-vmake.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
+    <div class="cover-brand-tag">Adriana Sousa</div>
+    <h1 class="cover-title">Meditação<br><em>Viva</em></h1>
+    <p class="cover-sub">O Despertar do Ser Essencial</p>
+    <div class="cover-divider"></div>
+    <div class="cover-datetime" id="coverDatetime">carregando...</div>
+    <button class="btn-primary" onclick="goToName()">Iniciar Jornada &nbsp;🌿</button>
+    <div class="cover-footer">
+      Elaborado por <strong>Marcelo Dávila</strong><br>
+      @marceloagentedigital
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ NAME ══════════ -->
+<div id="namescreen" class="screen">
+  <div class="name-card">
+    <div class="as-badge"><img src="https://pub-0de75c105f984c73a6321e028a9b80e6.r2.dev/Imagem%20do%20WhatsApp%20de%202025-10-29%20%C3%A0(s)%2010.15.44_5032b145-vmake.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
+    <h2>Como posso te chamar?</h2>
+    <p id="nameGreeting">Sua jornada será criada especialmente para você.</p>
+    <input class="name-input" id="nameInput" type="text" placeholder="Digite seu nome..."
+      oninput="onNameInput()" onkeydown="if(event.key==='Enter')startMain()">
+    <div class="mood-section">
+      <div class="mood-label">Como você está agora?</div>
+      <div class="mood-grid">
+        <button class="mood-btn" onclick="selectMood(this,'😔 Ansioso(a)','Perfeito — esta prática existe exatamente para isso. Você está no lugar certo.')">😔 Ansioso(a)</button>
+        <button class="mood-btn" onclick="selectMood(this,'😴 Cansado(a)','Este é o melhor momento para recarregar sua energia interior.')">😴 Cansado(a)</button>
+        <button class="mood-btn" onclick="selectMood(this,'😐 Neutro(a)','Aberto e disponível — o estado ideal para receber novos insights.')">😐 Neutro(a)</button>
+        <button class="mood-btn" onclick="selectMood(this,'🙂 Bem','Maravilhoso — vamos elevar ainda mais esta vibração.')">🙂 Bem</button>
+        <button class="mood-btn" onclick="selectMood(this,'✨ Ótimo(a)','Energia alta e consciência expandida — perfeito para aprofundar!')">✨ Ótimo(a)</button>
+        <button class="mood-btn" onclick="selectMood(this,'🔥 Em chamas','Esse fogo é o combustível que transforma intenção em ação!')">🔥 Em chamas</button>
+      </div>
+      <div class="mood-response" id="moodResponse"></div>
+    </div>
+    <button class="btn-primary" id="btnStart" onclick="startMain()" disabled style="width:100%;animation:none">Começar 🌿</button>
+    <div class="name-footer">
+      Elaborado por <strong>Marcelo Dávila</strong> · @marceloagentedigital
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MAIN ══════════ -->
+<div id="main" class="screen">
+  <!-- topbar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo"><img src="https://pub-0de75c105f984c73a6321e028a9b80e6.r2.dev/Imagem%20do%20WhatsApp%20de%202025-10-29%20%C3%A0(s)%2010.15.44_5032b145-vmake.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
+      <div class="topbar-info">
+        <div class="topbar-brand">Adriana Sousa</div>
+        <div class="topbar-meta" id="topbarMeta">carregando...</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-icon" id="btnTTSToggle" onclick="toggleTTS()" title="Leitura em voz alta">🔊</button>
+      <button class="btn-icon" onclick="showScreen('cover')" title="Menu">☰</button>
+    </div>
+  </div>
+
+  <!-- progress -->
+  <div class="progress-wrap" id="progressWrap" style="padding:10px 20px 8px"></div>
+
+  <!-- TTS bar -->
+  <div class="tts-bar" id="ttsBar" style="display:none">
+    <button class="tts-btn" onclick="ttsSkipBack()" title="Frase anterior">⏮</button>
+    <button class="tts-btn big" id="ttsPlayBtn" onclick="ttsTogglePlay()">▶</button>
+    <button class="tts-btn" onclick="ttsSkipFwd()" title="Próxima frase">⏭</button>
+    <div class="tts-bar-info">
+      <div class="tts-bar-title" id="ttsBarTitle">Pronto para iniciar</div>
+      <div class="tts-progress"><div class="tts-progress-fill" id="ttsProgressFill"></div></div>
+    </div>
+    <select class="tts-speed" id="ttsSpeed" onchange="changeSpeed()" title="Velocidade">
+      <option value="0.7">0.7×</option>
+      <option value="0.85" selected>0.85×</option>
+      <option value="1.0">1.0×</option>
+      <option value="1.2">1.2×</option>
+    </select>
+    <button class="tts-btn" onclick="closeTTSBar()" title="Fechar">✕</button>
+  </div>
+
+  <!-- content -->
+  <div class="content" id="content"></div>
+
+  <!-- bottom nav -->
+  <div class="bottomnav">
+    <button class="btn-nav btn-prev" id="btnPrev" onclick="changePage(-1)">← Anterior</button>
+    <div class="nav-dots" id="navDots"></div>
+    <button class="btn-nav btn-next" id="btnNext" onclick="changePage(1)">Próximo →</button>
+  </div>
+  <div class="footer-fixed">Elaborado por Marcelo Dávila · @marceloagentedigital</div>
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   DATA & STATE
+════════════════════════════════════════ */
+const DAYS = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+const MONTHS = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+
+let userName = "";
+let currentPage = 0;
+let ttsActive = false;
+let ttsPlaying = false;
+let ttsSentences = [];
+let ttsCurrent = 0;
+let ttsUtterance = null;
+let ttsSpeed = 0.85;
+
+/* ── Time helpers ── */
+function getNow() {
+  const n = new Date(), h = n.getHours(), m = n.getMinutes();
+  const day = DAYS[n.getDay()];
+  const date = `${n.getDate()} de ${MONTHS[n.getMonth()]} de ${n.getFullYear()}`;
+  const time = `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;
+  const greeting = h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite";
+  const period = h < 12 ? "manhã" : h < 18 ? "tarde" : "noite";
+  const challenge = h < 10
+    ? "Comece este dia sem reclamar — nem uma vez — durante 60 minutos completos"
+    : h < 14 ? "Feche os olhos por 3 minutos agora e respire com consciência plena"
+    : h < 18 ? "Escreva agora 3 coisas pelas quais você é genuinamente grato esta tarde"
+    : "Esta noite, antes de dormir, programe sua mente para um amanhã extraordinário";
+  const dayMsg = {
+    "Segunda-feira":"Que esta Segunda-feira seja o ponto de partida de algo extraordinário.",
+    "Terça-feira":"A Terça-feira é o dia perfeito para aprofundar o que começou ontem.",
+    "Quarta-feira":"Na metade da semana, renove seu compromisso com sua melhor versão.",
+    "Quinta-feira":"A Quinta-feira pede ação — aplique o que praticou com dobro de intenção.",
+    "Sexta-feira":"Encerre esta Sexta-feira com gratidão por tudo que você criou esta semana.",
+    "Sábado":"O Sábado é tempo sagrado — recarregue, reflita e prepare o terreno.",
+    "Domingo":"Este Domingo é sua tela em branco — programe com intenção a semana que vem.",
+  }[day] || "";
+  return { day, date, time, greeting, period, challenge, dayMsg, hour: h };
+}
+
+/* ── Streak ── */
+function getStreak() { return parseInt(localStorage.getItem('as_streak')||'0'); }
+function getLastDate() { return localStorage.getItem('as_last_date')||''; }
+function checkStreak() {
+  const today = new Date().toDateString();
+  const last = getLastDate();
+  if (last === today) return getStreak();
+  const yesterday = new Date(Date.now()-86400000).toDateString();
+  const s = last === yesterday ? getStreak()+1 : 1;
+  localStorage.setItem('as_streak', s);
+  localStorage.setItem('as_last_date', today);
+  return s;
+}
+function getStreakDisplay() {
+  const s = getStreak();
+  if (!s) return 0;
+  const today = new Date().toDateString();
+  return getLastDate() === today ? s : s;
+}
+
+/* ── Diary ── */
+function saveDiary(key, text) {
+  localStorage.setItem('as_diary_'+key, text);
+}
+function loadDiary(key) {
+  return localStorage.getItem('as_diary_'+key)||'';
+}
+
+/* ── Eval ── */
+function saveEval(key, q, val) {
+  localStorage.setItem('as_eval_'+key+'_'+q, val);
+}
+function loadEval(key, q) {
+  return localStorage.getItem('as_eval_'+key+'_'+q)||'';
+}
+
+/* ════════════════════════════════════════
+   TTS ENGINE — auto-scroll por frase
+   Corrige o bug do Chrome (pausa após ~15s)
+   usando keep-alive com speechSynthesis.resume()
+════════════════════════════════════════ */
+
+// Chrome bug fix: keep-alive interval
+let ttsKeepAlive = null;
+
+function ttsStartKeepAlive() {
+  ttsStopKeepAlive();
+  // Chrome pauses TTS silently after ~15s — resume() every 10s previne isso
+  ttsKeepAlive = setInterval(() => {
+    if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+      window.speechSynthesis.pause();
+      window.speechSynthesis.resume();
+    }
+  }, 10000);
+}
+function ttsStopKeepAlive() {
+  if (ttsKeepAlive) { clearInterval(ttsKeepAlive); ttsKeepAlive = null; }
+}
+
+function getVoicePT() {
+  const voices = window.speechSynthesis.getVoices();
+  return voices.find(v => v.lang === 'pt-BR') ||
+         voices.find(v => v.lang === 'pt_BR') ||
+         voices.find(v => v.lang.startsWith('pt')) ||
+         null;
+}
+
+function splitSentences(text) {
+  // limpa emojis e símbolos especiais
+  const clean = text
+    .replace(/[\u{1F300}-\u{1FFFF}]|[\u2600-\u27BF]|✦|☐|→|←|•/gu, '')
+    .replace(/\n/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  // divide em frases por . ! ? — mantendo ao menos 6 chars
+  const parts = clean.match(/[^.!?…]+[.!?…]+/g) || [clean];
+  return parts.map(s => s.trim()).filter(s => s.length > 6);
+}
+
+function buildSentenceSpans(el) {
+  ttsSentences = [];
+  const blocks = el.querySelectorAll('.tts-text');
+  blocks.forEach(block => {
+    // evita elementos dentro de textarea ou input
+    if (block.tagName === 'TEXTAREA' || block.tagName === 'INPUT') return;
+    const rawText = block.innerText || block.textContent || '';
+    const sentences = splitSentences(rawText);
+    if (!sentences.length) return;
+    // reconstrói o innerHTML com spans por frase
+    block.innerHTML = sentences.map((s, i) => {
+      const id = 'sent_' + ttsSentences.length;
+      ttsSentences.push({ id, text: s });
+      ttsSentences[ttsSentences.length - 1].blockRef = block;
+      return `<span class="sentence" id="${id}">${s} </span>`;
+    }).join('');
+    // agora atualiza os .el com referência real ao DOM
+    sentences.forEach((s, i) => {
+      const idx = ttsSentences.length - sentences.length + i;
+      ttsSentences[idx].el = document.getElementById(ttsSentences[idx].id);
+    });
+  });
+}
+
+function highlightSentence(idx) {
+  // remove highlight anterior
+  document.querySelectorAll('.sentence.active').forEach(s => s.classList.remove('active'));
+  if (idx < 0 || idx >= ttsSentences.length) return;
+  const sent = ttsSentences[idx];
+  if (!sent || !sent.el) return;
+  sent.el.classList.add('active');
+  // auto-scroll suave até a frase ficar visível no centro
+  sent.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // barra de progresso
+  const pct = ((idx + 1) / ttsSentences.length * 100).toFixed(1);
+  const pf = document.getElementById('ttsProgressFill');
+  if (pf) pf.style.width = pct + '%';
+  // label
+  const tl = document.getElementById('ttsBarTitle');
+  if (tl) tl.textContent = `Frase ${idx + 1} de ${ttsSentences.length}`;
+}
+
+function ttsSpeak(idx) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  if (idx < 0 || idx >= ttsSentences.length) {
+    // acabou tudo
+    ttsPlaying = false;
+    ttsStopKeepAlive();
+    const pb = document.getElementById('ttsPlayBtn');
+    if (pb) pb.textContent = '▶';
+    return;
+  }
+  ttsCurrent = idx;
+  highlightSentence(idx);
+
+  const utt = new SpeechSynthesisUtterance(ttsSentences[idx].text);
+  utt.lang = 'pt-BR';
+  utt.rate = ttsSpeed;
+  utt.pitch = 1.05;
+  utt.volume = 1;
+  const voice = getVoicePT();
+  if (voice) utt.voice = voice;
+
+  utt.onstart = () => {
+    ttsPlaying = true;
+    const pb = document.getElementById('ttsPlayBtn');
+    if (pb) pb.textContent = '⏸';
+    ttsStartKeepAlive();
+  };
+  utt.onend = () => {
+    if (ttsPlaying) {
+      // pequeno delay para não sobrecarregar o engine
+      setTimeout(() => ttsSpeak(idx + 1), 120);
+    }
+  };
+  utt.onerror = (e) => {
+    // ignora erros de cancelamento intencional
+    if (e.error === 'interrupted' || e.error === 'canceled') return;
+    if (ttsPlaying) setTimeout(() => ttsSpeak(idx + 1), 300);
+  };
+
+  ttsUtterance = utt;
+  window.speechSynthesis.speak(utt);
+}
+
+function ttsTogglePlay() {
+  if (!ttsActive) return;
+  if (ttsPlaying) {
+    // pausa
+    window.speechSynthesis.pause();
+    ttsPlaying = false;
+    ttsStopKeepAlive();
+    const pb = document.getElementById('ttsPlayBtn');
+    if (pb) pb.textContent = '▶';
+  } else {
+    // retoma
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+      ttsPlaying = true;
+      ttsStartKeepAlive();
+      const pb = document.getElementById('ttsPlayBtn');
+      if (pb) pb.textContent = '⏸';
+    } else {
+      // começa do ponto atual
+      ttsSpeak(ttsCurrent);
+    }
+  }
+}
+
+function ttsSkipFwd() {
+  const next = Math.min(ttsCurrent + 1, ttsSentences.length - 1);
+  ttsSpeak(next);
+}
+function ttsSkipBack() {
+  const prev = Math.max(ttsCurrent - 1, 0);
+  ttsSpeak(prev);
+}
+
+function ttsStop() {
+  ttsPlaying = false;
+  ttsStopKeepAlive();
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.sentence.active').forEach(s => s.classList.remove('active'));
+  const pb = document.getElementById('ttsPlayBtn');
+  if (pb) pb.textContent = '▶';
+  const pf = document.getElementById('ttsProgressFill');
+  if (pf) pf.style.width = '0%';
+  const tl = document.getElementById('ttsBarTitle');
+  if (tl) tl.textContent = 'Pronto para iniciar';
+}
+
+function toggleTTS() {
+  if (!('speechSynthesis' in window)) {
+    alert('Leitura em voz alta não disponível neste navegador.\nUse Google Chrome ou Microsoft Edge para esta funcionalidade.');
+    return;
+  }
+  ttsActive = !ttsActive;
+  const bar = document.getElementById('ttsBar');
+  const btn = document.getElementById('btnTTSToggle');
+  if (ttsActive) {
+    bar.style.display = 'flex';
+    btn.classList.add('active');
+    // aguarda um tick para o DOM estar pronto
+    setTimeout(() => {
+      buildSentenceSpans(document.getElementById('content'));
+      ttsCurrent = 0;
+      if (ttsSentences.length > 0) {
+        ttsSpeak(0);
+      } else {
+        const tl = document.getElementById('ttsBarTitle');
+        if (tl) tl.textContent = 'Nenhum texto encontrado nesta página';
+      }
+    }, 100);
+  } else {
+    bar.style.display = 'none';
+    btn.classList.remove('active');
+    ttsStop();
+    // limpa os spans
+    document.querySelectorAll('.sentence').forEach(s => {
+      s.outerHTML = s.textContent;
+    });
+    ttsSentences = [];
+  }
+}
+
+function closeTTSBar() {
+  ttsActive = false;
+  ttsStop();
+  document.getElementById('ttsBar').style.display = 'none';
+  document.getElementById('btnTTSToggle').classList.remove('active');
+  ttsSentences = [];
+}
+
+function changeSpeed() {
+  ttsSpeed = parseFloat(document.getElementById('ttsSpeed').value);
+  if (ttsPlaying) {
+    // recomeça a frase atual na nova velocidade
+    ttsSpeak(ttsCurrent);
+  }
+}
+
+/* ════════════════════════════════════════
+   SCREENS
+════════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  ttsStop(); ttsStopKeepAlive();
+  ttsActive=false; ttsSentences=[];
+  const bar=document.getElementById('ttsBar');
+  if(bar) bar.style.display='none';
+  const btn=document.getElementById('btnTTSToggle');
+  if(btn) btn.classList.remove('active');
+}
+
+function goToName() {
+  const N = getNow();
+  document.getElementById('nameGreeting').textContent =
+    `${N.greeting}! São ${N.time} desta ${N.day} — sua jornada será criada especialmente para você.`;
+  showScreen('namescreen');
+}
+
+function onNameInput() {
+  const v = document.getElementById('nameInput').value.trim();
+  document.getElementById('btnStart').disabled = !v;
+}
+
+function selectMood(btn, mood, msg) {
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const r = document.getElementById('moodResponse');
+  r.textContent = msg;
+  r.classList.add('show');
+}
+
+function startMain() {
+  const v = document.getElementById('nameInput').value.trim();
+  if (!v) return;
+  userName = v;
+  currentPage = 0;
+  checkStreak();
+  showScreen('main');
+  renderPage();
+}
+
+/* ════════════════════════════════════════
+   PAGES DATA
+════════════════════════════════════════ */
+function getPages() {
+  const N = getNow(), U = userName || 'querido(a)';
+  return [
+
+  /* ── 01 ── */
+  { title:'O Despertar Interior', sub:'Encontrando o Ser que você sempre foi', color:'#2d5a3d',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 01 · ${N.day} · ${N.time}</div>
+        <h1 class="ch-title">O Despertar Interior</h1>
+        <p class="ch-sub">Encontrando o Ser que você sempre foi</p>
+      </div>
+      ${streak()}
+      <div class="affirmation-box">
+        ✦ "${N.greeting}, ${U}! Hoje, às ${N.time}, você deu o passo mais importante: escolheu estar aqui."
+      </div>
+      <div class="text-block tts-text">
+        Esta é uma jornada até o núcleo de quem você verdadeiramente é — um espaço que existe antes de qualquer pensamento, antes de qualquer emoção, antes de qualquer palavra.
+        A maioria das pessoas passa a vida habitando apenas a superfície de si mesma.
+        Hoje, ${U}, você começa a mergulhar mais fundo — e isso muda tudo.
+        ${N.dayMsg}
+      </div>
+      ${sectionLabel('Reflexão de abertura')}
+      <div class="card card-sage">
+        <div class="card-icon">🍎</div>
+        <div class="card-title">O Paradoxo da Maçã</div>
+        <div class="card-text tts-text">NÃO pense em uma maçã vermelha agora. O que aconteceu? Sua mente foi direto para ela — mesmo com a instrução contrária. Isso revela uma lei fundamental: você não controla seus pensamentos pela força. Você os dirige pela atenção. Por isso meditamos: não para apagar pensamentos, mas para escolher conscientemente onde pousar nossa consciência.</div>
+      </div>
+      <div class="card card-sage">
+        <div class="card-icon">🧮</div>
+        <div class="card-title">A Matemática do Invisível</div>
+        <div class="card-text tts-text">2 + 2 = 4. Sempre. É a lei do mundo externo — mensurável e previsível. Mas quanto é Coragem + Dúvida? E Fé menos Medo? E Propósito vezes Ação diária? Seu Ser Essencial resolve essas equações todos os dias — sem calculadora, sem manual. Essa sabedoria silenciosa que opera em você é exatamente o que vamos despertar aqui.</div>
+      </div>
+      <div class="card card-sage">
+        <div class="card-icon">🌿</div>
+        <div class="card-title">A Árvore e o Vento</div>
+        <div class="card-text tts-text">Quando a tempestade chega, a árvore não discute com o vento. Ela não resiste — ela dobra. E quando o vento passa, ela continua em pé, mais enraizada do que antes. Seu Ser Essencial é assim: não é destruído pela tempestade dos pensamentos. Ele simplesmente permanece — firme, presente, inabalável.</div>
+      </div>
+      ${sectionLabel('Visualização guiada')}
+      <div class="card card-warm">
+        <div class="card-text tts-text">Feche os olhos por um momento. Imagine que você é uma montanha. Nuvens passam — pensamentos, preocupações, emoções. Mas a montanha não vai a lugar algum. Ela permanece. Quando você abrir os olhos, lembre-se: você é a montanha. Não as nuvens.</div>
+      </div>
+      ${challenge(N.challenge)}
+      ${diary('cap01', `O que sinto ao iniciar esta jornada, ${U}?`)}
+      ${brandFooter()}`;
+      initDiary('cap01'); initEval('cap01');
+    }
+  },
+
+  /* ── 02 ── */
+  { title:'O Ser Essencial', sub:'Quem você é além do que pensa e sente', color:'#3d6b4f',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 02 · ${N.day}</div>
+        <h1 class="ch-title">O Ser Essencial</h1>
+        <p class="ch-sub">Quem você é além do que pensa e sente</p>
+      </div>
+      <div class="text-block tts-text">
+        ${U}, vamos adentrar um território que pouquíssimas pessoas ousam explorar.
+        Se eu pedir para você mudar algo em sua vida, você precisará pensar em um plano.
+        Isso prova que seu corpo físico não é o seu Ser Essencial — o corpo é apenas o instrumento que executa o plano.
+        Quando você pensa em algo, seus sentimentos se ativam imediatamente.
+        Mas os pensamentos têm origem no passado — em memórias, experiências e crenças acumuladas.
+        Para criar algo genuinamente novo, você precisará de pensamentos que ainda não pensou.
+      </div>
+      <div class="quote-block">
+        <div class="quote-text">"Você não é seus pensamentos. Você é quem os observa."</div>
+        <div class="quote-author">— Sabedoria da meditação ancestral</div>
+      </div>
+      ${sectionLabel('Os três componentes do ser')}
+      ${expand('🧠','O Pensamento — não é você',`Seus pensamentos surgem e desaparecem como ondas no oceano.\nVocê não escolheu pensar o que pensa — os pensamentos simplesmente surgem.\nIsso prova que você é o observador dos pensamentos, não os pensamentos em si.\n\nExperimento: observe o próximo pensamento que surgir sem se identificar com ele. Apenas veja-o passar, como quem assiste nuvens do chão.`)}
+      ${expand('💚','O Sentimento — não é você',`Os sentimentos são respostas automáticas aos pensamentos.\nEles vêm e vão — alegria, tristeza, ansiedade, paz — todos passageiros.\nVocê, ${U}, é o espaço onde esses sentimentos surgem e se dissipam.\n\nNão existe sentimento ruim — existe sentimento não compreendido. Quando você os observa ao invés de resistir, eles se transformam.`)}
+      ${expand('🌳','O Corpo — não é você',`Seu corpo é extraordinário — mas é o veículo, não o motorista.\nEle envelhece, muda, tem necessidades. Mas há algo em você que permanece igual desde que você tem memória.\n\nEssa constância — essa presença que nunca muda — essa é a sua essência, ${U}.`)}
+      ${sectionLabel('Quem é então o observador?')}
+      <div class="card card-sage">
+        <div class="card-text tts-text">Pense em algo agora. Qualquer coisa. Feito. Agora — quem percebeu que você estava pensando? Há um observador dentro de você que assiste seus próprios pensamentos como se fossem filmes na tela. Você não é o filme. Você é a tela — sempre presente, nunca contaminada pelo que passa por ela.</div>
+      </div>
+      ${challenge(`⚡ Desafio de ${N.day}: Durante os próximos 5 minutos, observe cada pensamento que surgir e diga mentalmente: "Eu vejo esse pensamento" — sem julgamento. Apenas observe, como quem assiste nuvens passar.`)}
+      ${diary('cap02',`O que você percebe sobre si mesmo ao observar seus pensamentos, ${U}?`)}
+      ${brandFooter()}`;
+      initDiary('cap02');
+    }
+  },
+
+  /* ── 03 ── */
+  { title:'A Oração Perfeita', sub:'Sua conversa sagrada com o Divino interior', color:'#2d5a3d',
+    render:(el)=>{
+      const oracao = `Quem precisa de mim, quem ressoa comigo, quem está verdadeiramente pronto — que se aproxime.\n\nEu, ${U}, sou fonte de energia. Sou canal da Luz Divina que habita dentro de mim.\n\nDeus Pai Todo Poderoso que habita aqui dentro de mim — que o Senhor me permita enxergar além dos meus olhos, ouvir além dos meus ouvidos, sentir além dos meus sentimentos, para absorver Sua mensagem com clareza e profundidade.\n\nQue minhas mãos sejam Suas mãos. Que minha voz seja Sua voz. Que meu propósito seja o Seu propósito.\n\nEnvia para mim, meu Pai, todas as pessoas que precisam do que eu tenho a oferecer — e que eu, ${U}, esteja sempre pronto(a) a acolhê-las com amor, presença e dedicação total.\n\nMuito obrigado(a), meu Pai, por esta ${N.day} abençoada. Por esta vida extraordinária que eu vivo.\n\nMuito obrigado… muito obrigado… muito obrigado.`;
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 03 · ${N.day}</div>
+        <h1 class="ch-title">A Oração Perfeita</h1>
+        <p class="ch-sub">Sua conversa sagrada com o Divino interior</p>
+      </div>
+      <div class="text-block tts-text">
+        A oração não é um pedido enviado para longe. É uma conversa íntima com a inteligência mais elevada que existe — aquela que habita dentro de você, ${U}.
+        O principal propósito desta prática é elevar sua consciência além do nível dos pensamentos comuns, conectando-se à intuição — àquela voz que sabe antes de você saber, que sente antes de você entender.
+        Esta conexão revelará com clareza os caminhos a seguir, fortalecerá suas escolhas com autoconfiança genuína, e atrairá para sua vida as pessoas e circunstâncias alinhadas com seu propósito mais elevado.
+        Praticar ao despertar — quando sua mente ainda não foi influenciada pela agitação do mundo externo — é o segredo que transforma o exercício em poder real e duradouro.
+      </div>
+      ${sectionLabel('Texto da Oração — Adriana Sousa')}
+      <div class="affirmation-box" style="white-space:pre-line;font-size:.95rem;line-height:1.9" class="tts-text">${oracao}</div>
+      ${sectionLabel('Por que ao despertar?')}
+      ${expand('☀️',`São ${N.time} agora — O poder da manhã`,`São ${N.time} agora. Imagine que, ao abrir os olhos hoje, sua primeira conversa tivesse sido com seu Ser mais elevado — antes do celular, antes das notícias, antes das preocupações do dia.\n\nO que muda? Tudo. Você estabelece o TOM do seu dia antes que o mundo externo o faça por você.\n\nQuem controla a manhã, controla o dia.\nQuem controla o dia, constrói o destino.`)}
+      ${expand('💎','Oração e Meditação — as duas metades',`Oração é você falando com o Divino.\nMeditação é você escutando o Divino.\n\nUma sem a outra é incompleta.\n\nA combinação das duas cria o canal mais poderoso de transformação que existe — testado e comprovado por milênios, em todas as culturas e tradições espirituais do mundo.`)}
+      ${challenge(`🌅 Desafio de ${N.day}: Amanhã, antes de olhar para qualquer tela, feche os olhos por 5 minutos e converse com o Divino dentro de você. Observe como o seu dia inteiro muda a partir disso.`)}
+      ${diary('cap03',`Escreva aqui sua oração pessoal, ${U} — com suas próprias palavras:`)}
+      ${brandFooter()}`;
+      initDiary('cap03');
+    }
+  },
+
+  /* ── 04 ── */
+  { title:'Frequências da Consciência', sub:'A ciência por trás do estado Theta', color:'#2d5a3d',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 04 · ${N.day}</div>
+        <h1 class="ch-title">Frequências da Consciência</h1>
+        <p class="ch-sub">A ciência por trás do estado Theta</p>
+      </div>
+      <div class="text-block tts-text">
+        Seu cérebro emite ondas elétricas mensuráveis — frequências que correspondem a diferentes estados de consciência.
+        A neurociência moderna já mapeou isso com precisão extraordinária.
+        Para acessar seu Ser Essencial — sua intuição, sua criatividade profunda — você precisa atingir o estado THETA, entre 4 e 7,9 Hz.
+        A boa notícia: você não precisa de nenhum equipamento especial. A respiração consciente é a chave — simples, gratuita e extraordinariamente poderosa.
+      </div>
+      ${sectionLabel('Tabela das Frequências')}
+      <div class="card" style="padding:22px 20px">
+        ${freqRow('GAMA','40–200 Hz','#8b6914','Alta cognição, resolução de problemas complexos')}
+        ${freqRow('BETA','14–30 Hz','#b8a030','Estado de alerta, raciocínio lógico — e estresse crônico')}
+        ${freqRow('✦ THETA','4–7,9 Hz','var(--sage-dark)','Meditação profunda, intuição, criatividade máxima',true)}
+        ${freqRow('ALFA','8–13 Hz','var(--sage)','Relaxamento, meditação leve, estado de flow')}
+        ${freqRow('DELTA','1–3,9 Hz','var(--sage-light)','Sono profundo, regeneração celular, cura')}
+      </div>
+      ${sectionLabel('Prática: Respiração Consciente para Theta')}
+      ${breathingWidget()}
+      <div class="text-block tts-text">
+        Repetindo o ciclo de respiração, em apenas 5 minutos seu cérebro começa a transitar de BETA para ALFA e THETA.
+        Nesse estado, a intuição emerge naturalmente, insights surgem do nada, e a conexão espiritual se abre completamente.
+        Esta é a chave que ${U} tem gratuitamente em seu próprio corpo — disponível a qualquer momento.
+      </div>
+      ${challenge(`🧘 Desafio de ${N.day} (${N.time}): Faça 10 respirações conscientes agora — inspire em 4 tempos, segure em 4, expire em 6, repouso em 2. Use o círculo acima e note a diferença em seu estado.`)}
+      ${diary('cap04',`Como você se sentiu após a prática de respiração? Descreva em detalhes:`)}
+      ${brandFooter()}`;
+      initDiary('cap04'); initBreath();
+    }
+  },
+
+  /* ── 05 ── */
+  { title:'Como Conectar com o Eu Interior', sub:'O ritual de conexão passo a passo', color:'#2d5a3d',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 05 · ${N.day}</div>
+        <h1 class="ch-title">Como Conectar com o Eu Interior</h1>
+        <p class="ch-sub">O ritual de conexão passo a passo</p>
+      </div>
+      <div class="text-block tts-text">
+        Para conectar com sua intuição, com sua espiritualidade, com o Divino que habita dentro de você — é necessário um ritual de conexão consistente.
+        Não se trata de perfeição, ${U}. Trata-se de prática diária, repetida com intenção genuína, até que se torne tão natural quanto respirar.
+        O ritual a seguir foi desenvolvido para levar você ao estado THETA de forma gradual e segura, preparando o terreno para a oração e a meditação profunda.
+      </div>
+      ${sectionLabel('O Ritual Completo — Passo a Passo')}
+      <div class="steps-wrap">
+        ${step(1,'🪑','Prepare o Ambiente','Encontre um local tranquilo onde não será interrompido. Sente-se confortavelmente — nunca deite, pois sua mente entenderá como hora de dormir. Coloque o celular no modo avião. Este tempo é sagrado — é seu.')}
+        ${step(2,'👁','Fixe um Ponto','Levante levemente o olhar até o globo ocular se mover para cima. Fixe um ponto imaginário na parede à sua frente. Mantenha os olhos abertos e o foco neste ponto enquanto inicia a respiração.')}
+        ${step(3,'🌬️','Inicie a Respiração','Puxe o ar pelas narinas com tranquilidade até encher completamente os pulmões. Segure por 3 segundos. Solte pela boca suavemente. Segure por 3 segundos. Repita até sentir paz genuína — geralmente 5 a 8 ciclos.')}
+        ${step(4,'💬','Fale em Voz Alta','Assim que sentir relaxamento, comece a conversar em voz alta consigo mesmo: "Quanto mais eu respiro, mais tranquilo eu me sinto. Meus olhos estão relaxados. Meu corpo está completamente relaxado." Continue com voz calma e constante.')}
+        ${step(5,'🙏','Declare o Propósito','Ao fechar os olhos naturalmente, declare: "O propósito desta meditação é ouvir a voz da intuição, a voz de Deus que habita dentro de mim. Vou ficar nesta meditação por [X] minutos e ao retornar estarei com energia e ânimo total."')}
+        ${step(6,'✨','Inicie a Oração','Agora você está conectado. Comece sua oração pessoal: pergunte, peça e agradeça. Deixe as palavras fluírem naturalmente — sem roteiro, sem pressão. O que vier é o que precisa ser dito.')}
+        ${step(7,'🔔','Retorne com Intenção','Ao final, observe: o tempo que ficou foi próximo do que estipulou? Seus sentimentos são como você determinou? Se sim, sua mente está obedecendo seus comandos — você está no caminho certo.')}
+      </div>
+      ${sectionLabel('Afirmações durante a respiração')}
+      <div class="affirmation-box tts-text">
+        "Quanto mais eu respiro, mais tranquilo eu me sinto.<br>
+        Mais calmo e em paz eu me sinto.<br>
+        Meus olhos estão completamente relaxados.<br>
+        Meus ombros, meus braços e todo meu corpo relaxam.<br>
+        Cada vez mais, eu me sinto profundamente em paz."
+      </div>
+      ${challenge(`💫 Desafio de ${N.day}: Pratique o ritual completo hoje — mesmo que por apenas 10 minutos. O primeiro passo é sempre o mais poderoso.`)}
+      ${diary('cap05',`Como foi sua primeira tentativa do ritual de conexão? O que foi mais fácil? O que foi mais desafiador?`)}
+      ${brandFooter()}`;
+      initDiary('cap05');
+    }
+  },
+
+  /* ── 06 ── */
+  { title:'Tudo Acontece Antes de Dormir', sub:'Programando o amanhã enquanto o mundo descansa', color:'#1e4d30',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 06 · ${N.day}</div>
+        <h1 class="ch-title">Tudo Acontece Antes de Dormir</h1>
+        <p class="ch-sub">Programando o amanhã enquanto o mundo descansa</p>
+      </div>
+      <div class="text-block tts-text">
+        ${U}, há uma verdade que pouquíssimas pessoas conhecem: tudo que você vive hoje foi pensado ontem.
+        O que você está vivendo agora — este momento, este lugar, esta versão de você — foi programado por pensamentos e intenções de dias anteriores.
+        Isso significa que você tem um poder extraordinário: pode programar, ainda hoje, como será o seu amanhã.
+        Esta programação acontece no momento mais receptivo de toda a sua existência: os últimos 20 minutos antes de adormecer.
+        Nesse limiar entre a vigília e o sono, sua mente subconsciente está completamente aberta — como um campo fértil pronto para receber sementes poderosas.
+      </div>
+      <div class="quote-block">
+        <div class="quote-text">"O que você planta na mente antes de dormir, você colhe ao despertar."</div>
+        <div class="quote-author">— Adriana Sousa</div>
+      </div>
+      ${sectionLabel('Script para Programar o Sono')}
+      <div class="affirmation-box" style="white-space:pre-line;font-size:.93rem;line-height:1.9">Agora, neste instante, eu vou dormir tranquilamente — porque chegou o momento sagrado do meu descanso e regeneração.
+
+Vou dormir profundamente por 8 horas. Durante este sono, meu corpo e minha mente se renovam completamente. Cada célula se regenera com perfeição.
+
+Amanhã vou acordar às [seu horário] com uma energia extraordinária — com ânimo, disposição e motivação para fazer tudo que precisa ser feito, imediatamente e sem hesitação.
+
+Amanhã é dia de receber bênçãos. Amanhã é dia de criar. Amanhã é dia de prosperar.
+
+Muito obrigado(a) por esta ${N.day} abençoada. Muito obrigado(a) por esta vida maravilhosa que eu vivo.</div>
+      ${sectionLabel('A ciência por trás')}
+      ${expand('🔬','Por que a mente é mais receptiva antes de dormir?',`Quando você está prestes a adormecer, seu cérebro transita naturalmente de BETA para ALFA e THETA.\n\nNesse estado, o filtro crítico da mente consciente — que normalmente avalia, duvida e rejeita novas informações — está parcialmente desativado.\n\nO subconsciente recebe as instruções diretamente, sem resistência. É literalmente o melhor momento do dia para reprogramar crenças, padrões de comportamento e expectativas sobre o futuro.`)}
+      ${expand('⏰','A Ciência das 8 Horas de Sono',`Durante o sono profundo (DELTA), seu corpo:\n• Regenera células em ritmo 30% mais acelerado\n• Consolida memórias de aprendizado e habilidades\n• Reduz cortisol — o hormônio do estresse crônico\n• Produz hormônio do crescimento e restauração muscular\n• Elimina toxinas do tecido cerebral\n\nDormir 8 horas não é luxo. É a mais poderosa ferramenta de alta performance que existe — completamente gratuita.`)}
+      ${challenge(`🌙 Desafio desta noite (${N.day}): Antes de dormir, repita 3 vezes com emoção genuína: "Amanhã acordarei com energia extraordinária e disposição total para criar um dia memorável." Observe como você acorda.`)}
+      ${diary('cap06',`O que você quer programar para o seu amanhã? Escreva com detalhes e emoção:`)}
+      ${brandFooter()}`;
+      initDiary('cap06');
+    }
+  },
+
+  /* ── 07 ── */
+  { title:'Higiene Mental', sub:'Os 4 pilares inegociáveis da mente livre', color:'#2d5a3d',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 07 · ${N.day}</div>
+        <h1 class="ch-title">Higiene Mental</h1>
+        <p class="ch-sub">Os 4 pilares inegociáveis da mente livre</p>
+      </div>
+      <div class="text-block tts-text">
+        ${U}, assim como você limpa o corpo todos os dias — porque sabe que a sujeira se acumula — sua mente também precisa de limpeza diária e intencional.
+        A Higiene Mental não é uma prática ocasional. É um compromisso diário com sua saúde interior.
+        A OMS afirma que saúde mental e física são inseparáveis — sem uma, não existe a outra.
+        Há quatro fundamentos inegociáveis. Não são sugestões. São os alicerces de uma mente verdadeiramente livre e poderosa.
+      </div>
+      ${sectionLabel('Os 4 Pilares')}
+      <div class="pillar-card">
+        <div class="pillar-icon-wrap">🚫</div>
+        <div class="pillar-content">
+          <div class="pillar-num">1° Fundamento</div>
+          <div class="pillar-title">Não Reclame — nem em pensamento</div>
+          <div class="pillar-text tts-text">Quando você reclama, você sintoniza sua mente na frequência exata do problema. E a lei universal é precisa: o que você foca, se expande. Na próxima vez que sentir uma reclamação surgir, faça a troca: "Esse problema existe" → "Qual é a solução?". "Que situação difícil" → "O que posso aprender aqui?"</div>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon-wrap">🙏</div>
+        <div class="pillar-content">
+          <div class="pillar-num">2° Fundamento</div>
+          <div class="pillar-title">Não se Justifique — assuma e aja</div>
+          <div class="pillar-text tts-text">Justificativas são os assassinos silenciosos do progresso. Cada desculpa que você cria é uma corrente que te mantém preso no mesmo lugar. Pessoas extraordinárias erram com frequência — a diferença está no que fazem depois. Elas assumem, aprendem e agem imediatamente, sem drama.</div>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon-wrap">👁</div>
+        <div class="pillar-content">
+          <div class="pillar-num">3° Fundamento</div>
+          <div class="pillar-title">Não cuide da vida alheia — cuide da sua</div>
+          <div class="pillar-text tts-text">Cada minuto que você gasta julgando a vida de outras pessoas é um minuto roubado da sua própria existência. Quando você descreve negatividade em outra pessoa, essa energia passa a habitar em você. Foque no único território que você realmente controla: seus pensamentos, suas ações e seu crescimento diário.</div>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon-wrap">✨</div>
+        <div class="pillar-content">
+          <div class="pillar-num">4° Fundamento</div>
+          <div class="pillar-title">Pratique a Gratidão — 3 motivos sempre</div>
+          <div class="pillar-text tts-text">Gratidão não é sentimento passivo — é uma força ativa que reprograma literalmente seu sistema nervoso. Cada vez que você agradece com emoção genuína, seu cérebro libera dopamina e serotonina. A prática: escolha 3 bênçãos e diga 3 motivos pelos quais você é grato por cada uma. Faça isso todos os dias — inclusive pelas bênçãos que ainda não chegaram.</div>
+        </div>
+      </div>
+      ${sectionLabel('Autoavaliação — como estou hoje?')}
+      ${evalSection('cap07',[
+        'Hoje, evitei reclamar mesmo quando senti vontade?',
+        'Assumi minhas responsabilidades sem buscar justificativas?',
+        'Mantive meu foco na minha própria vida e crescimento?',
+        'Pratiquei gratidão com emoção genuína hoje?',
+      ])}
+      ${challenge(`🧹 Desafio de ${N.day}: Por 24 horas, toda vez que sentir uma reclamação surgindo — PAUSE. Respire. Reformule para uma pergunta de solução. Conte quantas vezes você conseguiu fazer essa transformação.`)}
+      ${diary('cap07',`Quais dos 4 pilares você sente que mais precisa desenvolver? Por quê?`)}
+      ${brandFooter()}`;
+      initDiary('cap07'); initEval('cap07');
+    }
+  },
+
+  /* ── 08 ── */
+  { title:'Afirmações por Dia da Semana', sub:'Intenções específicas para cada jornada', color:'#2d5a3d',
+    render:(el)=>{
+      const afirms = {
+        'Segunda-feira':'Hoje eu começo com clareza e intenção poderosa. Esta semana é minha tela em branco — e eu pinto com as cores da minha melhor versão. Cada ação que tomo hoje planta sementes para toda a semana.',
+        'Terça-feira':'Eu aprofundo o que comecei ontem. A Terça-feira é o dia do refinamento — onde ajusto, melhoro e elevo tudo que iniciei. Minha persistência é meu superpoder.',
+        'Quarta-feira':'No centro da semana, renovo meu compromisso. Não estou a meio caminho de desistir — estou a meio caminho de chegada. Minha energia é renovada e meu foco é inabalável.',
+        'Quinta-feira':'A Quinta-feira pede ação acelerada. Eu aplico o que aprendi com dobro de intenção. Cada tarefa concluída hoje é uma vitória que celebro com gratidão.',
+        'Sexta-feira':'Encerro esta semana com orgulho genuíno. Eu fiz o melhor que pude com o que tinha. Cada vitória, por menor que seja, merece ser reconhecida e celebrada.',
+        'Sábado':'O Sábado é tempo sagrado de renovação. Eu recarrego minha energia interior, aprofundo minha prática e preparo o terreno fértil para a semana que vem.',
+        'Domingo':'Este Domingo é meu planejamento sagrado. Eu defino com clareza o que quero criar na próxima semana. Minha intenção de hoje se torna a realidade de amanhã.',
+      };
+      const todayAfirm = afirms[N.day] || afirms['Segunda-feira'];
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 08 · Hoje: ${N.day}</div>
+        <h1 class="ch-title">Afirmações por Dia da Semana</h1>
+        <p class="ch-sub">Intenções específicas para cada jornada</p>
+      </div>
+      <div class="text-block tts-text">
+        Cada dia da semana tem uma energia particular — um ritmo, uma intenção, um propósito próprio.
+        Quando você alinha sua prática a essa energia natural, ${U}, cria um fluxo poderoso que potencializa tudo que você faz.
+        Abaixo, a afirmação específica para cada dia — e especialmente para este ${N.day} que você está vivendo agora.
+      </div>
+      <div class="affirmation-box" style="font-size:1.05rem;line-height:1.85">
+        ✦ Afirmação de ${N.day}:<br><br>
+        <em>"${todayAfirm}"</em>
+      </div>
+      ${sectionLabel('Todas as Afirmações Semanais')}
+      ${Object.entries(afirms).map(([d,a])=>expand(
+        d===N.day?'⭐':'📅',
+        d + (d===N.day?' ← Hoje':'' ),
+        `"${a}"\n\nComo praticar: Repita esta afirmação em voz alta 3 vezes ao despertar, com emoção genuína e olhos abertos. Sinta cada palavra no seu corpo.`
+      )).join('')}
+      ${sectionLabel('Crie sua afirmação personalizada')}
+      <div class="diary-section">
+        <div class="diary-title">✍️ Minha Afirmação Pessoal de ${N.day}</div>
+        <div class="diary-sub">Escreva uma afirmação poderosa com suas próprias palavras — algo que ressoa profundamente com quem você está se tornando:</div>
+        <textarea class="diary-textarea" id="diary_cap08" placeholder="Hoje eu sou...&#10;Hoje eu tenho...&#10;Hoje eu crio..."
+          onchange="saveDiary('cap08',this.value)">${loadDiary('cap08')}</textarea>
+        <div class="diary-actions">
+          <button class="btn-sm btn-sage" onclick="saveDiaryBtn('cap08')">💾 Salvar</button>
+        </div>
+        <div class="diary-saved" id="saved_cap08">✓ Salvo com sucesso</div>
+      </div>
+      ${challenge(`🌟 Desafio de ${N.day}: Repita sua afirmação pessoal em voz alta — com a mão no coração — por 3 vezes ao acordar e 3 vezes antes de dormir. Por 7 dias consecutivos. Observe a transformação.`)}
+      ${brandFooter()}`;
+    }
+  },
+
+  /* ── 09 ── */
+  { title:'Autoconhecimento e Emoções', sub:'Navegando o mundo interior com sabedoria', color:'#2d5a3d',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 09 · ${N.day}</div>
+        <h1 class="ch-title">Autoconhecimento e Emoções</h1>
+        <p class="ch-sub">Navegando o mundo interior com sabedoria</p>
+      </div>
+      <div class="text-block tts-text">
+        As emoções são mensageiras, ${U} — não inimigas.
+        Cada emoção que surge em você carrega uma informação preciosa sobre o que você precisa, o que te importa, o que está desalinhado com seus valores.
+        O problema não é sentir emoções intensas. O problema é deixá-las comandar suas decisões sem que você as compreenda.
+        Autoconhecimento é a arte de ouvir o que suas emoções estão dizendo — sem ser controlado por elas.
+      </div>
+      <div class="quote-block">
+        <div class="quote-text">"Entre o estímulo e a resposta há um espaço. Nesse espaço está o nosso poder de escolha."</div>
+        <div class="quote-author">— Viktor Frankl</div>
+      </div>
+      ${sectionLabel('O que cada emoção está dizendo')}
+      ${expand('😰','Ansiedade — a mensagem',`A ansiedade surge quando sua mente projeta cenários futuros negativos sem ter dados suficientes para embasá-los.\n\nO que ela está dizendo: "Eu preciso de clareza e de ação concreta no presente."\n\nA resposta: volte para o agora. Pergunte: "O que posso fazer AGORA, neste momento, que me aproxima do que quero?" Aja sobre isso. A ação dissolve a ansiedade.`)}
+      ${expand('😠','Raiva — a mensagem',`A raiva surge quando um limite importante foi cruzado — real ou percebido.\n\nO que ela está dizendo: "Um dos meus valores foi desrespeitado. Preciso de um limite claro aqui."\n\nA resposta: não reaja imediatamente. Respire 3 vezes profundamente. Identifique qual valor foi violado. Então comunique seu limite com calma e firmeza — sem agressividade, sem passividade.`)}
+      ${expand('😢','Tristeza — a mensagem',`A tristeza surge quando algo que tinha valor para você foi perdido — uma pessoa, uma expectativa, uma versão de si mesmo.\n\nO que ela está dizendo: "Algo que eu amava foi embora. Preciso de tempo para integrar essa perda."\n\nA resposta: permita sentir. A tristeza não combatida passa naturalmente. Resistir a ela a amplifica. Honre o que foi perdido — e então, gentilmente, volte sua atenção para o que você ainda tem.`)}
+      ${expand('😨','Medo — a mensagem',`O medo surge quando sua mente percebe um perigo — real ou imaginado — para sua segurança física, emocional ou social.\n\nO que ele está dizendo: "Há algo aqui que precisa da minha atenção cuidadosa."\n\nA resposta: pergunte — "Esse medo está me protegendo de um perigo real, ou está me impedindo de crescer?" Se for crescimento: agradeça ao medo e avance assim mesmo. Coragem não é ausência de medo — é ação apesar dele.`)}
+      ${sectionLabel('Mapa Emocional da Semana')}
+      <div class="card card-sage">
+        <div class="card-title">🗺️ Como você está emocionalmente nesta ${N.day}?</div>
+        <div style="margin-top:12px">
+          ${['Com energia e clareza','Ansioso(a) e acelerado(a)','Cansado(a) e pesado(a)','Tranquilo(a) e centrado(a)','Motivado(a) e criativo(a)','Confuso(a) e disperso(a)'].map((opt,i)=>`
+          <button class="eval-btn" style="display:block;width:100%;text-align:left;padding:12px 16px;margin-bottom:8px;height:auto;border-radius:10px;font-family:'Lora',serif;font-size:.92rem" 
+            onclick="selectEmotional(this)">${opt}</button>`).join('')}
+        </div>
+      </div>
+      ${challenge(`💚 Desafio de ${N.day}: Ao longo do dia, quando sentir uma emoção intensa, pause por 30 segundos antes de reagir. Pergunte: "O que essa emoção está tentando me dizer?" Anote sua descoberta aqui abaixo.`)}
+      ${diary('cap09',`Que emoção predomina em você nesta ${N.day}? O que ela está tentando te comunicar?`)}
+      ${brandFooter()}`;
+      initDiary('cap09');
+    }
+  },
+
+  /* ── 10 ── */
+  { title:'Lei da Atração e Ação', sub:'Pensamento + Sentimento + Movimento = Resultado', color:'#1e4d30',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 10 · ${N.day}</div>
+        <h1 class="ch-title">Lei da Atração e Ação</h1>
+        <p class="ch-sub">Pensamento + Sentimento + Movimento = Resultado</p>
+      </div>
+      <div class="text-block tts-text">
+        A Lei da Atração é frequentemente mal compreendida, ${U}.
+        Muitas pessoas acreditam que basta visualizar e desejar intensamente para que as coisas se manifestem.
+        A verdade é que a Lei da Atração é apenas metade da equação.
+        A outra metade — igualmente poderosa e frequentemente ignorada — é a Lei da Ação.
+        Atrair sem agir é sonho. Agir sem atrair é esforço sem direção. Os dois juntos criam o milagre.
+      </div>
+      ${sectionLabel('A Equação Completa')}
+      <div class="steps-wrap">
+        ${step(1,'🧠','Pensamento com clareza','Defina com extrema precisão o que você quer. Não "quero ser rico" — mas "quero faturar R$15.000 por mês ajudando pessoas a transformarem sua saúde até dezembro deste ano." A clareza é o primeiro passo da manifestação.')}
+        ${step(2,'💚','Sentimento com emoção','Sinta agora como seria ter o que você quer. Não no futuro — agora. Seu subconsciente não distingue entre realidade e imaginação vivida com emoção. Quando você sente o resultado antes de ele acontecer, você o atrai.')}
+        ${step(3,'🌊','Ação com consistência','Faça pelo menos uma ação — por menor que seja — todo dia em direção ao seu objetivo. A consistência diária supera qualquer talento esporádico. Uma ação pequena por dia por um ano = 365 passos à frente.')}
+        ${step(4,'🙏','Gratidão como acelerador','Agradeça pelo que já tem E pelo que ainda está vindo. A gratidão eleva sua frequência vibracional, aumenta sua percepção de oportunidades e acelera o processo de manifestação de formas que a lógica não consegue explicar.')}
+      </div>
+      <div class="quote-block">
+        <div class="quote-text">"Pedir, acreditar que já recebeu — e então agir como se já fosse verdade."</div>
+        <div class="quote-author">— Síntese das maiores tradições espirituais</div>
+      </div>
+      ${sectionLabel('Sim ou Não — A Matemática das Decisões')}
+      <div class="card card-sage">
+        <div class="card-text tts-text">
+          Sim + Ação = Resultado.<br>
+          Não + Medo = Paralisia.<br>
+          Sim + Medo = Coragem — a mais poderosa combinação que existe.<br>
+          Não + Sabedoria = Discernimento — igualmente valioso.<br><br>
+          O Ser Essencial não age por impulso nem por medo. Ele age pela voz silenciosa da intuição — que sempre conhece o caminho certo, mesmo quando a mente racional ainda não entende o porquê.
+        </div>
+      </div>
+      ${sectionLabel('Meu Objetivo com Clareza')}
+      ${diary('cap10',`Descreva com máxima precisão UMA coisa que você quer manifestar: o que é, quando, como saberá que chegou lá. Escreva no presente, como se já fosse realidade:`)}
+      ${challenge(`🎯 Desafio de ${N.day}: Identifique UMA ação pequena que você pode fazer HOJE em direção ao seu objetivo. Faça agora — antes de dormir. Anote o que foi e como se sentiu ao completá-la.`)}
+      ${brandFooter()}`;
+      initDiary('cap10');
+    }
+  },
+
+  /* ── 11 ── */
+  { title:'O Sistema Completo', sub:'4 passos que transformam o dia em vitória', color:'#2d5a3d',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 11 · ${N.day}</div>
+        <h1 class="ch-title">O Sistema Completo</h1>
+        <p class="ch-sub">4 passos que transformam o dia em vitória</p>
+      </div>
+      <div class="text-block tts-text">
+        ${U}, tudo que você aprendeu até aqui é um sistema orgânico — cada peça se encaixa e potencializa as outras.
+        O segredo não está em saber. Está em praticar. Todo dia. Sem exceção.
+        Até que sua mente comece a obedecer seus comandos de forma automática e natural.
+        Como você sabe que está funcionando? É simples: quando você acorda com exatamente a energia e disposição que programou na noite anterior — é o sinal inequívoco de que sua mente está sob seu comando.
+      </div>
+      <div class="streak-strip">
+        <div class="streak-num" id="streakNum">0</div>
+        <div>
+          <div class="streak-label">dias consecutivos</div>
+          <div class="streak-sub">de prática com Adriana Sousa</div>
+        </div>
+        <button class="streak-btn" onclick="markToday()">✓ Pratiquei Hoje</button>
+      </div>
+      ${sectionLabel('Os 4 Movimentos do Sistema')}
+      <div class="steps-wrap">
+        ${step(1,'🌙','Antes de Dormir (cada noite)','Programe sua mente para o dia seguinte. Determine o horário de acordar, a qualidade do sono e exatamente como você estará ao despertar. Com intenção, com emoção, com certeza inabalável.')}
+        ${step(2,'☀️','Ao Despertar (primeiro gesto)','Antes do celular, antes das redes sociais — verifique: seus primeiros pensamentos e sentimentos estão alinhados com o que você programou? Se sim, sua mente está obedecendo. Continue praticando todos os dias.')}
+        ${step(3,'🙏','Oração e Meditação Theta (manhã)','Logo após acordar, faça sua oração e meditação em estado Theta. Com entusiasmo, com convicção, com propósito absolutamente claro sobre o dia extraordinário que você vai criar.')}
+        ${step(4,'🧹','Higiene Mental (o dia inteiro)','Durante todo o dia: não reclame, não se justifique, não cuide da vida alheia, pratique gratidão com 3 motivos. Todos os dias, sem exceção — até que se torne tão natural quanto respirar.')}
+      </div>
+      ${sectionLabel('Por que funciona?')}
+      ${expand('🧬','A neurociência da repetição',`Seu cérebro aprende por repetição — esse é o princípio fundamental da neuroplasticidade.\n\nCada vez que você pratica:\n• Novas conexões neurais se formam\n• As antigas (hábitos negativos) enfraquecem por desuso\n• O comportamento se automatiza gradualmente\n\nEm 21 dias: nova conexão neural significativa.\nEm 66 dias: comportamento automatizado.\nEm 1 ano: nova identidade consolidada.\n\nVocê não está apenas mudando hábitos — está se recriando.`)}
+      ${expand('⏱️',`${N.day}: Onde você está no sistema?`,`São ${N.time} de ${N.day}.\n\nNeste momento específico, o próximo passo prático é:\n"${N.challenge}"\n\nFaça isso agora. Não amanhã. Não daqui a pouco.\nAgora — porque este momento às ${N.time} desta ${N.day} é exatamente o momento certo.\n\nPessoas de sucesso fazem o que precisa ser feito — imediatamente, sem questionamentos, gostando ou não.`)}
+      ${challenge(`🎯 Compromisso de ${N.day}: Escreva em papel e cole em algum lugar visível: "Eu, ${U}, pratico meu sistema mental todos os dias — sem exceção." Pesquisa comprova: comprometimento escrito aumenta adesão em até 3 vezes.`)}
+      ${diary('cap11',`Qual dos 4 passos do sistema você sente que precisa fortalecer? Crie um plano específico:`)}
+      ${brandFooter()}`;
+      initDiary('cap11');
+      const sEl = document.getElementById('streakNum');
+      if(sEl) sEl.textContent = getStreakDisplay();
+    }
+  },
+
+  /* ── 12 ── */
+  { title:'Sua Jornada Continua', sub:'Ferramentas, próximos passos e compromisso final', color:'#1e4d30',
+    render:(el)=>{
+      el.innerHTML = `
+      <div class="ch-header">
+        <div class="ch-number">Capítulo 12 · ${N.day} — Final</div>
+        <h1 class="ch-title">Sua Jornada Continua</h1>
+        <p class="ch-sub">Ferramentas, próximos passos e compromisso final</p>
+      </div>
+      <div class="text-block tts-text">
+        ${U}, você chegou ao último capítulo desta apostila — mas este é apenas o começo de uma jornada que dura a vida inteira.
+        O verdadeiro trabalho — e os verdadeiros frutos — acontecem na prática diária, no comprometimento e na consistência inabalável.
+        Tudo que você aprendeu aqui é um sistema testado, fundamentado na neurociência e na sabedoria espiritual de milênios.
+        E ele funciona para todos que se comprometem a praticá-lo todos os dias, sem exceção.
+      </div>
+      <div class="quote-block">
+        <div class="quote-text">"Pessoas que conquistaram o sucesso fazem o que tem que ser feito — gostando ou não, sendo fácil ou não — imediatamente, sem questionamentos."</div>
+        <div class="quote-author">— Adriana Sousa</div>
+      </div>
+      ${sectionLabel('Revisão do Sistema Completo')}
+      <div class="card card-sage">
+        <div class="card-title">📋 Checklist Diário — Adriana Sousa</div>
+        <div style="margin-top:14px">
+          ${['☐ Antes de dormir: programei minha mente para o dia seguinte','☐ Ao despertar: verifiquei o alinhamento com o que programei','☐ Fiz minha oração e meditação em estado Theta','☐ Não reclamei — nem uma vez sequer','☐ Não me justifiquei — assumi e agi','☐ Cuidei da minha vida — não da alheia','☐ Pratiquei gratidão com 3 motivos genuínos','☐ Fiz UMA ação em direção ao meu objetivo'].map(item=>`
+          <div style="padding:10px 0;border-bottom:1px solid var(--ivory-dark);font-family:'Lora',serif;font-size:.95rem;color:var(--text-light);cursor:pointer"
+            onclick="this.style.textDecoration=this.style.textDecoration?'':'line-through';this.style.color=this.style.color===''?'var(--sage)':''">
+            ${item}
+          </div>`).join('')}
+        </div>
+      </div>
+      ${sectionLabel('Quanto tempo leva a transformação?')}
+      ${expand('🌱','Os marcos da neuroplasticidade',`Pesquisa de neurociência e psicologia comportamental mostra:\n\n• 21 dias → Nova conexão neural significativa formada\n• 66 dias → Comportamento automatizado sem esforço consciente\n• 6 meses → Padrão emocional profundamente transformado\n• 1 ano → Nova identidade completamente consolidada\n\nVocê, ${U}, está exatamente no início.\nE todo começo genuíno é um dos momentos mais extraordinários que existem.\n\nO que você planta hoje — nesta ${N.day}, às ${N.time} — você colhe amanhã.`)}
+      ${expand('📅','Plano dos próximos 21 dias',`Semana 1 (Dias 1-7): Foque nos passos 1 e 2 do sistema — programação noturna e verificação matinal. Mantenha simples e consistente.\n\nSemana 2 (Dias 8-14): Adicione a oração e meditação Theta diária. Mesmo que por apenas 10 minutos. Consistência supera duração.\n\nSemana 3 (Dias 15-21): Integre a Higiene Mental ao longo de todo o dia. Os 4 fundamentos em prática simultânea.\n\nAo final dos 21 dias: você não vai mais querer parar — porque você terá visto a diferença com seus próprios olhos.`)}
+      ${sectionLabel('Compromisso Final')}
+      <div class="diary-section">
+        <div class="diary-title">✍️ Minha Declaração de Compromisso</div>
+        <div class="diary-sub">Escreva aqui, com suas próprias palavras, seu compromisso com esta prática:</div>
+        <textarea class="diary-textarea" id="diary_cap12" style="min-height:160px"
+          placeholder="Eu, ${U}, me comprometo a praticar o sistema de Adriana Sousa todos os dias porque..."
+          onchange="saveDiary('cap12',this.value)">${loadDiary('cap12')||`Eu, ${U}, me comprometo a praticar o sistema de Adriana Sousa todos os dias porque `}</textarea>
+        <div class="diary-actions">
+          <button class="btn-sm btn-sage" onclick="saveDiaryBtn('cap12')">💾 Salvar meu compromisso</button>
+        </div>
+        <div class="diary-saved" id="saved_cap12">✓ Compromisso salvo</div>
+      </div>
+      <div class="card" style="background:linear-gradient(135deg,var(--sage-dark),var(--sage));border:none;text-align:center;padding:32px 24px">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;margin-bottom:10px;font-style:italic">
+          "Boa sorte, ${U}!"
+        </div>
+        <div style="font-family:'Lora',serif;font-size:.95rem;color:rgba(255,255,255,.85);line-height:1.8">
+          Esta jornada foi um presente — para você e para todos que você vai tocar com sua transformação.
+          <br><br>Com amor e propósito,<br>
+          <strong style="font-family:'Playfair Display',serif;font-size:1.1rem">Adriana Sousa</strong>
+        </div>
+      </div>
+      <div class="brand-footer">
+        Elaborado por <strong>Marcelo Dávila</strong><br>
+        @marceloagentedigital
+      </div>`;
+      initDiary('cap12');
+    }
+  },
+
+  ]; // end pages
+}
+
+/* ════════════════════════════════════════
+   RENDER HELPERS
+════════════════════════════════════════ */
+function sectionLabel(t){
+  return `<div class="section-label">${t}</div>`;
+}
+function expand(icon,title,text){
+  return `<div class="expand-card">
+    <div class="expand-header" onclick="toggleExpand(this)">
+      <span class="expand-icon">${icon}</span>
+      <span class="expand-title">${title}</span>
+      <span class="expand-arrow">▼</span>
+    </div>
+    <div class="expand-body tts-text">${text.replace(/\n/g,'<br>')}</div>
+  </div>`;
+}
+function step(n,icon,title,text){
+  return `<div class="step-item">
+    <div class="step-num">${n}</div>
+    <div class="step-content">
+      <div class="step-title">${icon} ${title}</div>
+      <div class="step-text tts-text">${text}</div>
+    </div>
+  </div>`;
+}
+function challenge(text){
+  return `<div class="challenge-box">
+    <div class="challenge-label">✦ Desafio do Dia</div>
+    <div class="challenge-text">${text}</div>
+  </div>`;
+}
+function diary(key,prompt){
+  return `<div class="diary-section">
+    <div class="diary-title">📓 Diário de Bordo</div>
+    <div class="diary-sub">${prompt}</div>
+    <textarea class="diary-textarea" id="diary_${key}" placeholder="Escreva aqui seus pensamentos..."
+      onchange="saveDiary('${key}',this.value)"></textarea>
+    <div class="diary-actions">
+      <button class="btn-sm btn-outline" onclick="clearDiary('${key}')">Limpar</button>
+      <button class="btn-sm btn-sage" onclick="saveDiaryBtn('${key}')">💾 Salvar</button>
+    </div>
+    <div class="diary-saved" id="saved_${key}">✓ Salvo com sucesso</div>
+  </div>`;
+}
+function evalSection(key, questions){
+  return `<div class="card" style="margin-bottom:18px">
+    <div class="card-title" style="margin-bottom:18px">📊 Como fui hoje?</div>
+    ${questions.map((q,i)=>`
+    <div class="eval-item">
+      <div class="eval-question">${q}</div>
+      <div class="eval-scale">
+        ${[1,2,3,4,5].map(v=>`<button class="eval-btn ${loadEval(key,i)===String(v)?'sel':''}" 
+          onclick="selectEval(this,'${key}',${i},${v})">${v}</button>`).join('')}
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+function freqRow(name,hz,color,desc,bold){
+  return `<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--ivory-dark);${bold?'background:var(--sage-bg);margin:-1px -4px;padding-left:4px;border-radius:6px;':''}">
+    <div style="min-width:80px;font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;color:${color}">${name}</div>
+    <div style="min-width:72px;font-family:'Nunito',sans-serif;font-size:.75rem;color:var(--text-muted)">${hz}</div>
+    <div style="font-family:'Lora',serif;font-size:.88rem;color:${bold?'var(--sage-dark)':'var(--text-light)'};font-weight:${bold?600:400}">${desc}</div>
+  </div>`;
+}
+function streak(){
+  const s = getStreakDisplay();
+  return `<div class="streak-strip">
+    <div class="streak-num">${s||0}</div>
+    <div>
+      <div class="streak-label">dias consecutivos</div>
+      <div class="streak-sub">de prática com Adriana Sousa</div>
+    </div>
+    <button class="streak-btn" onclick="markToday()">✓ Pratiquei Hoje</button>
+  </div>`;
+}
+function brandFooter(){
+  return `<div class="brand-footer">Elaborado por <strong>Marcelo Dávila</strong> · @marceloagentedigital</div>`;
+}
+function breathingWidget(){
+  return `<div class="breath-section">
+    <div class="breath-title-text">Círculo de Respiração</div>
+    <div class="breath-subtitle">Toque para iniciar · Inspire 4 · Segure 4 · Expire 6 · Repouso 2</div>
+    <div class="breath-circle-wrap" onclick="toggleBreath()">
+      <div class="breath-outer" id="breathOuter"></div>
+      <div class="breath-inner" id="breathInner">
+        <div class="breath-phase" id="breathPhase">Toque para iniciar</div>
+        <div class="breath-count" id="breathCnt"></div>
+      </div>
+    </div>
+    <p class="breath-hint" id="breathHint">Toque no círculo para começar</p>
+  </div>`;
+}
+
+/* ════════════════════════════════════════
+   INTERACTIONS
+════════════════════════════════════════ */
+function toggleExpand(header){
+  const body = header.nextElementSibling;
+  header.classList.toggle('open');
+  body.classList.toggle('show');
+}
+function initDiary(key){
+  const el = document.getElementById('diary_'+key);
+  if(el) el.value = loadDiary(key);
+}
+function saveDiaryBtn(key){
+  const el = document.getElementById('diary_'+key);
+  if(el){ saveDiary(key, el.value); }
+  const saved = document.getElementById('saved_'+key);
+  if(saved){ saved.style.display='block'; setTimeout(()=>saved.style.display='none',2500); }
+}
+function clearDiary(key){
+  const el = document.getElementById('diary_'+key);
+  if(el){ el.value=''; saveDiary(key,''); }
+}
+function selectEval(btn, key, q, val){
+  const group = btn.parentElement.querySelectorAll('.eval-btn');
+  group.forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  saveEval(key, q, val);
+}
+function initEval(key){}
+function selectEmotional(btn){
+  btn.parentElement.querySelectorAll('.eval-btn').forEach(b=>{
+    b.style.background='';b.style.color='';b.style.borderColor='';
+  });
+  btn.style.background='var(--sage)';
+  btn.style.color='#fff';
+  btn.style.borderColor='var(--sage)';
+}
+function markToday(){
+  checkStreak();
+  const els = document.querySelectorAll('#streakNum');
+  els.forEach(el=>el.textContent=getStreakDisplay());
+  const btn = event.target;
+  btn.textContent='✓ Marcado!';
+  btn.style.background='var(--sage-dark)';
+  setTimeout(()=>{ btn.textContent='✓ Pratiquei Hoje'; btn.style.background=''; },2000);
+}
+
+/* ── BREATHING ── */
+let breathActive=false, breathPhaseIdx=0, breathCountVal=0, breathTimer=null;
+const BREATH_PHASES=[
+  {label:"Inspire",dur:4,scale:"1.55",color:"rgba(255,255,255,0.4)"},
+  {label:"Segure",dur:4,scale:"1.55",color:"rgba(255,255,255,0.5)"},
+  {label:"Expire",dur:6,scale:"1",color:"rgba(255,255,255,0.2)"},
+  {label:"Repouso",dur:2,scale:"1",color:"rgba(255,255,255,0.15)"},
+];
+function initBreath(){
+  breathActive=false; breathPhaseIdx=0;
+  clearInterval(breathTimer);
+}
+function toggleBreath(){
+  if(breathActive){
+    breathActive=false; clearInterval(breathTimer);
+    const i=document.getElementById('breathInner');
+    const o=document.getElementById('breathOuter');
+    const p=document.getElementById('breathPhase');
+    const c=document.getElementById('breathCnt');
+    const h=document.getElementById('breathHint');
+    if(i){i.style.transform='scale(1)'; i.style.background='rgba(255,255,255,0.12)';}
+    if(o){o.style.transform='scale(1)';}
+    if(p)p.textContent='Toque para iniciar';
+    if(c)c.textContent='';
+    if(h)h.textContent='Toque no círculo para começar';
+    return;
+  }
+  breathActive=true; breathPhaseIdx=0; runBreathPhase2();
+}
+function runBreathPhase2(){
+  if(!breathActive)return;
+  const ph=BREATH_PHASES[breathPhaseIdx];
+  const i=document.getElementById('breathInner');
+  const o=document.getElementById('breathOuter');
+  const p=document.getElementById('breathPhase');
+  const c=document.getElementById('breathCnt');
+  const h=document.getElementById('breathHint');
+  if(!i)return;
+  i.style.transition=`all ${ph.dur*.9}s cubic-bezier(.4,0,.2,1)`;
+  o.style.transition=`all ${ph.dur*.9}s cubic-bezier(.4,0,.2,1)`;
+  i.style.transform=`scale(${ph.scale})`;
+  o.style.transform=`scale(${parseFloat(ph.scale)>1?1.15:1})`;
+  i.style.background=ph.color;
+  if(p)p.textContent=ph.label;
+  if(h)h.textContent=ph.label==='Inspire'?'Encha os pulmões completamente':ph.label==='Segure'?'Mantenha com calma':ph.label==='Expire'?'Solte todo o ar suavemente':'Descanse em paz';
+  breathCountVal=ph.dur;
+  if(c)c.textContent=breathCountVal;
+  clearInterval(breathTimer);
+  breathTimer=setInterval(()=>{
+    breathCountVal--;
+    if(c)c.textContent=breathCountVal;
+    if(breathCountVal<=0){
+      clearInterval(breathTimer);
+      breathPhaseIdx=(breathPhaseIdx+1)%BREATH_PHASES.length;
+      if(breathActive) runBreathPhase2();
+    }
+  },1000);
+}
+
+/* ════════════════════════════════════════
+   PAGE RENDERING
+════════════════════════════════════════ */
+function renderPage(){
+  const pages = getPages();
+  const p = pages[currentPage];
+  const N = getNow();
+
+  // topbar meta
+  document.getElementById('topbarMeta').textContent =
+    `${N.time} · ${N.day} · Cap. ${currentPage+1}/${pages.length}`;
+
+  // progress
+  const pw = document.getElementById('progressWrap');
+  pw.innerHTML = '';
+  pages.forEach((_,i)=>{
+    const d = document.createElement('div');
+    d.className = 'prog-step' + (i===currentPage?' active':i<currentPage?' done':'');
+    d.onclick = ()=>{ currentPage=i; renderPage(); };
+    pw.appendChild(d);
+  });
+
+  // nav dots
+  const nd = document.getElementById('navDots');
+  nd.innerHTML = '';
+  const visible = pages.length <= 6 ? pages : pages.slice(Math.max(0,currentPage-2), Math.min(pages.length,currentPage+4));
+  pages.forEach((_,i)=>{
+    if(Math.abs(i-currentPage)<=3){
+      const d=document.createElement('div');
+      d.className='nav-dot'+(i===currentPage?' active':i<currentPage?' done':'');
+      d.onclick=()=>{currentPage=i;renderPage();};
+      nd.appendChild(d);
+    }
+  });
+
+  // buttons
+  document.getElementById('btnPrev').disabled = currentPage===0;
+  const btnNext = document.getElementById('btnNext');
+  if(currentPage===pages.length-1){ btnNext.textContent='🌿 Concluído'; btnNext.disabled=true; }
+  else { btnNext.textContent='Próximo →'; btnNext.disabled=false; }
+
+  // render content
+  const content = document.getElementById('content');
+  content.innerHTML = '<div class="page-wrap" id="pageWrap"></div>';
+  const wrap = document.getElementById('pageWrap');
+  p.render(wrap);
+
+  // TTS — limpa e reinicia se ativo, aguardando DOM ficar pronto
+  ttsStop(); ttsStopKeepAlive(); ttsSentences=[]; ttsCurrent=0;
+  if(ttsActive){
+    setTimeout(()=>{
+      buildSentenceSpans(document.getElementById('content'));
+      if(ttsSentences.length>0) ttsSpeak(0);
+      else {
+        const tl=document.getElementById('ttsBarTitle');
+        if(tl) tl.textContent='Nenhum texto nesta página';
+      }
+    }, 250);
+  }
+
+  content.scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+function changePage(dir){
+  const pages = getPages();
+  const np = currentPage + dir;
+  if(np<0||np>=pages.length) return;
+  currentPage = np;
+  breathActive=false; clearInterval(breathTimer);
+  renderPage();
+  window.scrollTo(0,0);
+}
+
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+window.addEventListener('load',()=>{
+  updateDateTime();
+  setInterval(updateDateTime, 30000);
+  // Pre-load voices
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  }
+});
+
+function updateDateTime(){
+  const N = getNow();
+  const el = document.getElementById('coverDatetime');
+  if(el) el.textContent = `${N.day} · ${N.time} · ${N.date}`;
+  const tm = document.getElementById('topbarMeta');
+  if(tm) tm.textContent = `${N.time} · ${N.day} · Cap. ${currentPage+1}/${getPages().length}`;
+}
+</script>
+</body>
+</html>
